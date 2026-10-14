@@ -8,6 +8,8 @@
 
 [functions]
   node_bundler = "esbuild"
+  # Dependência opcional do `pg`: não existe no ambiente e quebraria o bundle.
+  external_node_modules = ["pg-native"]
 
 # A API do backend roda como Function; o front chama /api/... normalmente.
 [[redirects]]
