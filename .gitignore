@@ -1,0 +1,16 @@
+node_modules/
+backend/data/
+dist/
+.DS_Store
+*.log
+
+# Netlify
+.netlify/
+
+# Variáveis de ambiente (nunca versionar segredos)
+.env
+.env.local
+.env.*.local
+
+# Backup local do pacote original recebido (não faz parte do site)
+LAVEAGORA

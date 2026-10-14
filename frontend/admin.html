@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin · LAVE AGORA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="admin-body">
+    <main class="admin-wrap">
+      <section class="admin-card" id="login-card">
+        <h1>Painel LAVE AGORA</h1>
+        <p>Troca preços, promo e dúvidas da atendente.</p>
+        <form id="login-form">
+          <label>Usuário<input name="username" autocomplete="username" required /></label>
+          <label>Senha<input name="password" type="password" autocomplete="current-password" required /></label>
+          <button type="submit">Entrar</button>
+          <p class="err hidden" id="login-err"></p>
+        </form>
+      </section>
+
+      <section class="admin-dash hidden" id="dash">
+        <header class="admin-head">
+          <h1>Admin LAVE AGORA</h1>
+          <div>
+            <a href="/" target="_blank" rel="noopener">Ver LP</a>
+            <button type="button" id="logout">Sair</button>
+          </div>
+        </header>
+
+        <form id="settings-form" class="admin-grid">
+          <fieldset>
+            <legend>Destaque (preço normal)</legend>
+            <label>Lavagem R$<input name="featuredWash" type="number" step="0.01" min="0" required /></label>
+            <label>Secagem R$<input name="featuredDry" type="number" step="0.01" min="0" required /></label>
+            <label>Rótulo lavagem<input name="washLabel" /></label>
+            <label>Rótulo secagem<input name="dryLabel" /></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Promoção automática</legend>
+            <label class="check"><input name="promoEnabled" type="checkbox" /> Ativar promo nos dias/horários</label>
+            <label>Lavagem promo R$<input name="promoWash" type="number" step="0.01" min="0" required /></label>
+            <label>Secagem promo R$<input name="promoDry" type="number" step="0.01" min="0" required /></label>
+            <label>Selo<input name="promoBadge" /></label>
+            <p class="hint">Dias da semana (o site troca sozinho):</p>
+            <div class="days" id="days"></div>
+            <p class="hint">Janelas de horário (Brasília). Deixe vazio = o dia inteiro.</p>
+            <div id="windows"></div>
+            <button type="button" class="ghost" id="add-window">+ horário</button>
+          </fieldset>
+
+          <fieldset>
+            <legend>Cupom</legend>
+            <label class="check"><input name="couponEnabled" type="checkbox" /> Ativar cupom nos dias/horários</label>
+            <label>Nome do cupom<input name="couponName" placeholder="Cupom especial" /></label>
+            <label>Código<input name="couponCode" placeholder="ESPECIAL12" /></label>
+            <label>Lavagem com cupom R$<input name="couponWash" type="number" step="0.01" min="0" required /></label>
+            <label>Secagem com cupom R$<input name="couponDry" type="number" step="0.01" min="0" required /></label>
+            <p class="hint">Dias em que o cupom aparece:</p>
+            <div class="days" id="coupon-days"></div>
+            <p class="hint">Horários (Brasília). Vazio = o dia inteiro.</p>
+            <div id="coupon-windows"></div>
+            <button type="button" class="ghost" id="add-coupon-window">+ horário do cupom</button>
+          </fieldset>
+
+          <fieldset>
+            <legend>WhatsApp e marca</legend>
+            <label>Nome<input name="brandName" /></label>
+            <label>WhatsApp (só números, com 55)<input name="whatsapp" /></label>
+            <label>Mensagem pronta<input name="whatsappMessage" /></label>
+            <label>Frase<input name="tagline" /></label>
+            <label>Endereço<input name="address" /></label>
+          </fieldset>
+
+          <div class="full">
+            <button type="submit">Salvar preços e promo</button>
+            <p class="ok hidden" id="save-ok">Salvo. A LP já usa os novos valores.</p>
+          </div>
+        </form>
+
+        <section class="faq-admin">
+          <h2>Dúvidas da atendente</h2>
+          <p>Cadastra pergunta, resposta e palavras-chave. O chat usa isso na hora.</p>
+          <div id="faq-list"></div>
+          <button type="button" class="ghost" id="add-faq">+ dúvida</button>
+          <button type="button" id="save-faqs">Salvar dúvidas</button>
+          <p class="ok hidden" id="faq-ok">Dúvidas atualizadas.</p>
+        </section>
+      </section>
+    </main>
+    <script type="module" src="/src/admin.js"></script>
+  </body>
+</html>

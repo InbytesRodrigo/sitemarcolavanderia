@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>LAVE AGORA — Lavanderia Self Service 24h</title>
+    <meta name="description" content="LAVE AGORA Unidade Fátima, Canoas. Lavanderia self-service 24 horas. Lavagem e secagem a partir de R$14,90." />
+    <meta name="theme-color" content="#5B0E8B" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="icon" href="/logo.svg" />
+  </head>
+  <body>
+    <div class="dots" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="#topo">
+        <img src="/logo.svg" alt="LAVE AGORA" class="brand-logo" width="48" height="48" />
+        <span>
+          <strong>LAVE AGORA</strong>
+          <small>Self Service · 24h</small>
+        </span>
+      </a>
+      <a class="btn-wa" id="wa-top" target="_blank" rel="noopener">WhatsApp</a>
+    </header>
+
+    <main id="topo">
+      <section class="hero">
+        <p class="live"><span></span> Aberta agora · 24 horas</p>
+
+        <div class="price-board" id="precos">
+          <div class="lime-ticket" id="promo-ribbon">DESTAQUE</div>
+          <p class="price-kicker">Lave ou seque a partir de</p>
+          <div class="price-pair">
+            <article>
+              <span id="wash-tag">Destaque</span>
+              <h2 id="wash-label">Lavagem</h2>
+              <p class="amount"><small>R$</small><strong id="wash-price">14,90</strong></p>
+              <p class="was hidden" id="wash-was"></p>
+            </article>
+            <div class="plus">+</div>
+            <article>
+              <span id="dry-tag">Destaque</span>
+              <h2 id="dry-label">Secagem</h2>
+              <p class="amount"><small>R$</small><strong id="dry-price">14,90</strong></p>
+              <p class="was hidden" id="dry-was"></p>
+            </article>
+          </div>
+          <div class="combo">
+            <span>Lavar + secar</span>
+            <strong>R$ <b id="combo-price">29,80</b></strong>
+            <small class="hidden" id="combo-was"></small>
+          </div>
+          <aside class="coupon-card hidden" id="coupon-card">
+            <p class="coupon-live">CUPOM ATIVO AGORA</p>
+            <p class="coupon-name" id="coupon-name">Cupom especial</p>
+            <button type="button" class="coupon-code" id="coupon-code" aria-label="Copiar cupom">ESPECIAL12</button>
+            <p class="coupon-deal" id="coupon-deal">R$12,50 lavar + R$12,50 secar = R$25,00</p>
+            <p class="coupon-copied hidden" id="coupon-copied">Código copiado!</p>
+          </aside>
+          <p class="promo-note" id="promo-note"></p>
+        </div>
+
+        <h1>Para quem valoriza roupas <em>macias e limpas</em></h1>
+        <p class="lead">Lavanderia self-service em Canoas. Chegou, lavou, secou e partiu — qualquer hora do dia ou da noite.</p>
+        <div class="hero-cta">
+          <a class="btn-wa lg" id="wa-hero" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <button class="btn-ghost" type="button" id="open-chat">Tirar uma dúvida</button>
+        </div>
+
+        <div class="hero-visual">
+          <div class="photo-wrap">
+            <img src="/hero.jpg" alt="Cliente da LAVE AGORA com cesto de roupas limpas" />
+            <p class="photo-pin">Unidade Fátima</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>24 HORAS · SELF SERVICE · PIX · CARTÃO · UNIDADE FÁTIMA · CANOAS · LAVOU · SECOU · PARTIU · </span>
+          <span>24 HORAS · SELF SERVICE · PIX · CARTÃO · UNIDADE FÁTIMA · CANOAS · LAVOU · SECOU · PARTIU · </span>
+        </div>
+      </section>
+
+      <section class="place">
+        <div>
+          <p class="eyebrow">Onde estamos</p>
+          <h2>Unidade Fátima</h2>
+          <p id="addr">Av. Guilherme Schell, 2504 — Bairro Fátima / Rio Branco, Canoas</p>
+          <a class="btn-ghost" href="https://maps.google.com/?q=Av.+Guilherme+Schell,+2504,+Canoas" target="_blank" rel="noopener">Abrir no mapa</a>
+        </div>
+        <div class="place-card">
+          <img src="/logo.jpg" alt="" />
+          <p>LAVE AGORA<br />Lavanderia Self Service</p>
+        </div>
+      </section>
+
+      <section class="faq-strip" id="duvidas">
+        <div>
+          <p class="eyebrow">Atendente</p>
+          <h2>Dúvida? Fala aqui mesmo</h2>
+          <p>Como se estivesse no balcão. Se faltar alguma coisa, o WhatsApp está a um toque.</p>
+          <div class="faq-pills" id="faq-pills"></div>
+        </div>
+        <aside class="mini-chat">
+          <header>
+            <img src="/logo.svg" alt="" />
+            <div>
+              <strong>Atendente LAVE AGORA</strong>
+              <small>online agora</small>
+            </div>
+          </header>
+          <div class="msgs" id="mini-msgs"></div>
+          <form id="mini-form">
+            <input id="mini-input" maxlength="400" placeholder="Escreve sua dúvida..." autocomplete="off" />
+            <button type="submit">Enviar</button>
+          </form>
+        </aside>
+      </section>
+
+      <section class="how" id="como">
+        <p class="eyebrow">Como usar</p>
+        <div class="steps">
+          <article>
+            <span>1</span>
+            <h3>Chega</h3>
+            <p>24h, no seu tempo.</p>
+          </article>
+          <article>
+            <span>2</span>
+            <h3>Lava e seca</h3>
+            <p>30 a 45 min cada.</p>
+          </article>
+          <article>
+            <span>3</span>
+            <h3>Paga e leva</h3>
+            <p>Pix, cartão ou dinheiro.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <img src="/logo.jpg" alt="LAVE AGORA" />
+      <div>
+        <p><strong>LAVE AGORA</strong> · Lavanderia Self Service 24h</p>
+        <p id="foot-addr">Av. Guilherme Schell, 2504 — Canoas</p>
+        <p>WhatsApp <a id="wa-foot" target="_blank" rel="noopener">+55 51 8406-6339</a></p>
+      </div>
+    </footer>
+
+    <div class="mobile-bar">
+      <button type="button" id="fab-chat">Dúvida</button>
+      <a class="btn-wa" id="wa-fab" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+
+    <div class="sheet hidden" id="chat-sheet">
+      <div class="sheet-card">
+        <header>
+          <img src="/logo.svg" alt="" />
+          <div>
+            <strong>Atendente LAVE AGORA</strong>
+            <small>Como se estivesse no balcão</small>
+          </div>
+          <button type="button" id="close-chat" aria-label="Fechar">×</button>
+        </header>
+        <div class="msgs" id="sheet-msgs"></div>
+        <form id="sheet-form">
+          <input id="sheet-input" maxlength="400" placeholder="Pergunta o que quiser..." autocomplete="off" />
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
