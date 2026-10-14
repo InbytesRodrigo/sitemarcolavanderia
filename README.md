@@ -62,9 +62,15 @@ valores de desenvolvimento, que são públicos no repositório.
 
 ## Persistência
 
-- **No Netlify:** [Netlify Blobs](https://docs.netlify.com/blobs/overview/) (store `lava24`),
-  então as alterações feitas no painel admin sobrevivem aos deploys.
 - **Localmente:** arquivos JSON em `backend/data/` (não versionados).
+- **No Netlify:** o backend usa [Netlify Blobs](https://docs.netlify.com/blobs/overview/)
+  (store `lava24`) **quando o runtime fornece `NETLIFY_BLOBS_CONTEXT`**.
+
+  ⚠️ No deploy atual esse contexto não é injetado, então gravar pelo painel admin
+  responde `503` e nada é salvo — em produção valem os valores padrão definidos em
+  `backend/server.js`. A leitura (`/api/public`), o chat e o login funcionam
+  normalmente. Quando o armazenamento estiver disponível, a mesma rota passa a
+  persistir sem qualquer mudança de código.
 
 ## Deploy
 

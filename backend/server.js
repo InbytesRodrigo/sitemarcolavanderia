@@ -129,7 +129,11 @@ function auth(req, res, next) {
 const wrap = (fn) => (req, res, ...rest) =>
   Promise.resolve(fn(req, res, ...rest)).catch((err) => {
     console.error('[api]', err)
-    if (!res.headersSent) res.status(500).json({ error: 'Erro interno' })
+    if (res.headersSent) return
+    if (err && err.code === 'STORAGE_UNAVAILABLE') {
+      return res.status(503).json({ error: err.message })
+    }
+    res.status(500).json({ error: 'Erro interno' })
   })
 
 const TZ = 'America/Sao_Paulo'
