@@ -63,22 +63,38 @@ function renderPrices(data) {
     comboWas.classList.add('hidden')
   }
 
-  if (coupon && coupon.active) {
+  // O cupom é o chamariz da home: aparece sempre que está habilitado no
+  // painel, com o selo "USE O CUPOM" e o código pronto para copiar.
+  if (coupon && coupon.enabled) {
     couponCard.classList.remove('hidden')
+    document.getElementById('coupon-live').textContent = 'USE O CUPOM'
     document.getElementById('coupon-name').textContent = coupon.name || 'Cupom especial'
     document.getElementById('coupon-code').textContent = coupon.code
     document.getElementById('coupon-deal').textContent =
-      `R$ ${money(coupon.wash)} lavar + R$ ${money(coupon.dry)} secar = R$ ${money(Number(coupon.wash) + Number(coupon.dry))}`
+      `Lavagem + secagem por R$ ${money(Number(coupon.wash) + Number(coupon.dry))} com o cupom`
+    const days = (couponSchedule && couponSchedule.days) || []
+    const hours = (couponSchedule && couponSchedule.windows || [])
+      .map((w) => `${w.start} às ${w.end}`)
+      .join(' e ')
+    const when = coupon.active
+      ? 'Cupom ativo agora · toque no código para copiar'
+      : days.length
+        ? `Válido ${days.join(', ').toLowerCase()}${hours ? `, ${hours}` : ''} · toque para copiar`
+        : 'Toque no código para copiar'
+    document.getElementById('coupon-when').textContent = when
   } else {
     couponCard.classList.add('hidden')
   }
 
   const bits = []
   if (pricing.couponActive) {
-    bits.push(`Cupom ${coupon.code} valendo agora.`)
-  } else if (coupon && coupon.enabled && couponSchedule && couponSchedule.days.length) {
+    bits.push(`Use o cupom ${coupon.code} agora e pague menos.`)
+  } else if (coupon && coupon.enabled) {
     const hours = (couponSchedule.windows || []).map((w) => `${w.start}–${w.end}`).join(' e ')
-    bits.push(`Cupom ${coupon.code} em ${couponSchedule.days.join(', ')}${hours ? ` das ${hours}` : ''}.`)
+    const days = (couponSchedule.days || []).join(', ')
+    bits.push(
+      `Use o cupom ${coupon.code}${days ? ` em ${days}` : ''}${hours ? ` das ${hours}` : ''}.`
+    )
   }
   if (promo.enabled && schedule.days.length) {
     const hours = (schedule.windows || []).map((w) => `${w.start}–${w.end}`).join(' e ')

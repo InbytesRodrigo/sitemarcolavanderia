@@ -58,18 +58,25 @@ let schemaReadyPromise = null
 // ainda não ter sido aplicada no ambiente.
 function ready(db) {
   if (schemaReadyPromise === null) {
-    schemaReadyPromise = db
-      .query(
-        `CREATE TABLE IF NOT EXISTS kv (
-           key TEXT PRIMARY KEY,
-           value JSONB NOT NULL,
-           updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-         )`
-      )
-      .catch((err) => {
-        schemaReadyPromise = null
-        throw err
-      })
+    schemaReadyPromise = (async () => {
+      try {
+        await db.query(
+          `CREATE TABLE IF NOT EXISTS kv (
+             key TEXT PRIMARY KEY,
+             value JSONB NOT NULL,
+             updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+           )`
+        )
+      } catch (err) {
+        // A credencial de runtime pode não ter CREATE no schema, mas a tabela
+        // já existe (criada pela migração). Só é erro se ela não existir.
+        const { rows } = await db.query("SELECT to_regclass('public.kv') AS name")
+        if (!rows[0] || !rows[0].name) throw err
+      }
+    })().catch((err) => {
+      schemaReadyPromise = null
+      throw err
+    })
   }
   return schemaReadyPromise
 }

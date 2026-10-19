@@ -37,7 +37,7 @@ const DEFAULT_SETTINGS = {
     badge: 'PROMOÇÃO'
   },
   coupon: {
-    enabled: false,
+    enabled: true,
     code: 'ESPECIAL12',
     name: 'Cupom especial',
     wash: 12.5,
@@ -105,7 +105,7 @@ const DEFAULT_FAQS = [
   {
     id: '10',
     q: 'Tem cupom?',
-    a: 'Sim. Quando o cupom está ativo, o código aparece bem grande no topo do site. Toque nele para copiar e usar na hora.',
+    a: 'Tem sim. O cupom aparece no topo da home, logo abaixo dos preços, com o código bem grande. Toque no código para copiar e use na hora.',
     keywords: ['cupom', 'codigo', 'código', 'especial12', 'desconto']
   }
 ]

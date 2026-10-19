@@ -361,9 +361,11 @@ button, input { font: inherit; }
   50% { box-shadow: 0 0 0 6px rgba(182, 255, 60, 0.22); }
 }
 .coupon-live {
-  font-size: 11px;
+  font-family: "Archivo Black", sans-serif;
+  font-size: clamp(16px, 5vw, 24px);
   font-weight: 800;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
 }
 .coupon-name {
   margin: 4px 0 8px;
@@ -388,6 +390,12 @@ button, input { font: inherit; }
   font-size: 13px;
   font-weight: 800;
   color: #fff;
+}
+.coupon-when {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.82);
 }
 .coupon-copied {
   margin-top: 6px;

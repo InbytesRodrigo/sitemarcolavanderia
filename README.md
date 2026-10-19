@@ -8,7 +8,7 @@ Lavanderia self-service 24h (Unidade Fátima, Canoas). Landing page com preços 
 .
 ├── backend/                     # API Express (Node)
 │   ├── server.js                # rotas, preços, promoções, chat e admin
-│   └── storage.js               # persistência (Netlify Blobs / arquivo local)
+│   └── storage.js               # persistência (Netlify DB / arquivo local)
 ├── frontend/                    # Site Vite (HTML + CSS + JS)
 │   ├── index.html               # página principal
 │   ├── admin.html               # painel administrativo
@@ -69,17 +69,24 @@ Tudo dentro do Netlify, sem serviço externo:
   na tabela `kv`, criada pela migração em `netlify/database/migrations/`.
 - **Localmente:** arquivos JSON em `backend/data/` (não versionados).
 
-⚠️ O Netlify injeta `NETLIFY_DB_URL` nas Functions apenas em builds feitos pelo
-próprio Netlify (deploy conectado ao repositório Git). Enquanto o site não estiver
-conectado, gravar pelo painel admin responde `503` com mensagem clara e nada é
-salvo — em produção valem os valores padrão de `backend/server.js`. Leitura
-(`/api/public`), chat e login funcionam normalmente. O código já está pronto: ao
-conectar o repositório e reimplantar, a gravação passa a persistir sem alteração.
+As migrações rodam no deploy:
+
+- `0001_kv` cria a tabela `kv` (chave/valor em JSONB).
+- `0002_kv_runtime_grants` libera `SELECT/INSERT/UPDATE/DELETE` na `kv` para a
+  credencial de runtime do Netlify DB (`netlifydb_readonly`). Sem esse GRANT o
+  painel admin recebe `permission denied for table kv`.
+
+O Netlify só injeta `NETLIFY_DB_URL` automaticamente em builds feitos por ele a
+partir do repositório conectado. Para deploys enviados pelo CLI, a variável está
+registrada no projeto (escopo *functions*, contexto *production*) apontando para a
+conexão de produção do Netlify DB — por isso gravar pelo painel persiste mesmo em
+deploy manual. O valor fica no Netlify (Environment variables), nunca no Git.
 
 ## Deploy
 
-O projeto é publicado no Netlify a partir deste repositório. O deploy é automático:
-todo push para a branch principal dispara build e publicação.
+O projeto fica no Netlify e, enquanto o repositório não estiver vinculado no painel
+(GitHub App do Netlify), a publicação é feita pelo CLI. Depois de vincular o repo à
+branch `main`, todo push dispara build e publicação automaticamente.
 
 Para publicar manualmente com o CLI:
 
